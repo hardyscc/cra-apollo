@@ -1,21 +1,35 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Query } from 'react-apollo'
+import { gql } from 'apollo-boost'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    )
+export const STOCKS_QUERY = gql`
+  query {
+    stocks(type: EQTY, first: 10, skip: 0) {
+      code
+      name
+    }
   }
-}
+`
 
-export default App
+export const StocksQuery = () => (
+  <Query query={STOCKS_QUERY}>
+    <App />
+  </Query>
+)
+
+export const App = ({ loading, error, data }) => {
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error :(</div>
+  return (
+    <div>
+      Stocks :
+      <ul>
+        {data.stocks.map(stock => (
+          <li>
+            {stock.code} {stock.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
