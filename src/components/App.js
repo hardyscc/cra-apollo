@@ -11,13 +11,7 @@ export const STOCKS_QUERY = gql`
   }
 `
 
-export const StocksQuery = () => (
-  <Query query={STOCKS_QUERY}>
-    <App />
-  </Query>
-)
-
-export const App = ({ loading, error, data }) => {
+export const AppComponent = ({ loading, error, data }) => {
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error :(</div>
   return (
@@ -25,7 +19,7 @@ export const App = ({ loading, error, data }) => {
       Stocks :
       <ul>
         {data.stocks.map(stock => (
-          <li>
+          <li key={stock.code}>
             {stock.code} {stock.name}
           </li>
         ))}
@@ -33,3 +27,7 @@ export const App = ({ loading, error, data }) => {
     </div>
   )
 }
+
+export const App = () => (
+  <Query query={STOCKS_QUERY}>{result => <AppComponent {...result} />}</Query>
+)

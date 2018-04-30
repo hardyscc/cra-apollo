@@ -1,22 +1,22 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from 'enzyme'
 import { MockedProvider } from 'react-apollo/test-utils'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
-import App, { GET_STOCKS } from '../App'
+import { STOCKS_QUERY, App } from '../App'
 
 it('renders welcome message', () => {
+  const data = { stocks: [{ code: '0001.HK', name: '0001' }] }
   const mocks = [
     {
-      request: { query: GET_STOCKS },
-      result: { data: { stocks: [{ code: '0001.HK', name: '0001' }] } }
+      request: { query: STOCKS_QUERY },
+      result: { data }
     }
   ]
-  const tree = renderer.create(
+  const tree = render(
     <MockedProvider mocks={mocks}>
-      <App />
+      <App data={data} />
     </MockedProvider>
   )
-
   expect(tree).toMatchSnapshot()
 })
