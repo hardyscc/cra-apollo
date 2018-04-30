@@ -10,9 +10,9 @@ import './index.css'
 // Pass your GraphQL endpoint to uri
 const client = new ApolloClient({ uri: 'https://portfolios.now.sh/' })
 
-const ApolloApp = AppComponent => (
+const ApolloApp = Component => (
   <ApolloProvider client={client}>
-    <AppComponent />
+    <Component />
   </ApolloProvider>
 )
 

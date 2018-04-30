@@ -10,9 +10,6 @@
     "react-dom": "^16.3.2"
   },
   "devDependencies": {
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "jest-enzyme": "^6.0.0",
     "react-scripts": "1.1.4",
     "react-test-renderer": "^16.3.2"
   },
@@ -21,5 +18,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": ["src/components/**/*.{js,jsx}"]
   }
 }
