@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render, Simulate, wait } from 'react-testing-library'
+import 'dom-testing-library/extend-expect'
 import { MockedProvider } from 'react-apollo/test-utils'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
@@ -19,27 +20,24 @@ const mocks = [
 ]
 
 describe('App', () => {
-  it('render', () => {
-    const output = renderer.create(
+  it('render', async () => {
+    const { container, getByText } = render(
       <MockedProvider mocks={mocks}>
         <App />
       </MockedProvider>
     )
-    expect(output).toMatchSnapshot()
+    await wait(() => getByText('Stocks'))
+    expect(container).toMatchSnapshot()
   })
 })
 
 describe('AppComponent', () => {
   it('handles a loading state', () => {
-    const output = renderer.create(<AppComponent loading />)
-    expect(output).toMatchSnapshot()
+    const { container } = render(<AppComponent loading />)
+    expect(container).toMatchSnapshot()
   })
   it('handles an error state', () => {
-    const output = renderer.create(<AppComponent error />)
-    expect(output).toMatchSnapshot()
-  })
-  it('returns markup for array of stocks', () => {
-    const output = renderer.create(<AppComponent data={data} />)
-    expect(output).toMatchSnapshot()
+    const { container } = render(<AppComponent error />)
+    expect(container).toMatchSnapshot()
   })
 })

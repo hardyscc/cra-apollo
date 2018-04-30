@@ -2,36 +2,42 @@
 
 exports[`App render 1`] = `
 <div>
-  Loading...
+  <div>
+    Loading...
+  </div>
+</div>
+`;
+
+exports[`App render 2`] = `
+<div>
+  <div>
+    Stocks :
+    <ul>
+      <li>
+        0001.HK
+        長和
+      </li>
+      <li>
+        0002.HK
+        中電控股
+      </li>
+    </ul>
+  </div>
 </div>
 `;
 
 exports[`AppComponent handles a loading state 1`] = `
 <div>
-  Loading...
+  <div>
+    Loading...
+  </div>
 </div>
 `;
 
 exports[`AppComponent handles an error state 1`] = `
 <div>
-  Error :(
-</div>
-`;
-
-exports[`AppComponent returns markup for array of stocks 1`] = `
-<div>
-  Stocks :
-  <ul>
-    <li>
-      0001.HK
-       
-      長和
-    </li>
-    <li>
-      0002.HK
-       
-      中電控股
-    </li>
-  </ul>
+  <div>
+    Error :(
+  </div>
 </div>
 `;
