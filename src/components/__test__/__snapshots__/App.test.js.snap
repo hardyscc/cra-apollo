@@ -1,8 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders welcome message 1`] = `
+exports[`App error 1`] = `
 <div
-  id="stocks"
+  id="error"
+>
+  Error :(
+</div>
+`;
+
+exports[`App render 1`] = `
+<div
+  id="success"
 >
   Stocks :
   <ul>

@@ -6,19 +6,40 @@ import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { STOCKS_QUERY, App } from '../App'
 
-it('renders welcome message', async () => {
+describe('App', () => {
+  const request = { query: STOCKS_QUERY }
   const data = { stocks: [{ code: '0001.HK', name: '0001' }] }
-  const mocks = [
-    {
-      request: { query: STOCKS_QUERY },
-      result: { data }
-    }
-  ]
-  const wrapper = mount(
-    <MockedProvider mocks={mocks}>
-      <App />
-    </MockedProvider>
-  )
-  const component = await createWaitForElement('#stocks')(wrapper)
-  expect(component).toMatchSnapshot()
+
+  it('render', async () => {
+    const mocks = [
+      {
+        request,
+        result: { data }
+      }
+    ]
+    const wrapper = mount(
+      <MockedProvider mocks={mocks}>
+        <App />
+      </MockedProvider>
+    )
+    const component = await createWaitForElement('#success')(wrapper)
+    expect(component).toMatchSnapshot()
+  })
+
+  it('error', async () => {
+    const mocks = [
+      {
+        request: { query: STOCKS_QUERY },
+        error: new Error('Something went wrong')
+      }
+    ]
+
+    const wrapper = mount(
+      <MockedProvider mocks={mocks}>
+        <App />
+      </MockedProvider>
+    )
+    const component = await createWaitForElement('#error')(wrapper)
+    expect(component).toMatchSnapshot()
+  })
 })
