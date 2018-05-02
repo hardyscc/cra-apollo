@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+// @flow
+import React from 'react'
 import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost'
 
@@ -11,23 +12,23 @@ export const STOCKS_QUERY = gql`
   }
 `
 
-export const AppComponent = ({ loading, error, data }) => {
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error :(</div>
-  return (
-    <div>
-      Stocks :
-      <ul>
-        {data.stocks.map(stock => (
-          <li key={stock.code}>
-            {stock.code} {stock.name}
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
 export const App = () => (
-  <Query query={STOCKS_QUERY}>{result => <AppComponent {...result} />}</Query>
+  <Query query={STOCKS_QUERY}>
+    {({ loading, error, data }) => {
+      if (loading) return <div>Loading...</div>
+      if (error) return <div>Error :(</div>
+      return (
+        <div>
+          Stocks :
+          <ul>
+            {data.stocks.map(stock => (
+              <li key={stock.code}>
+                {stock.code} {stock.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }}
+  </Query>
 )

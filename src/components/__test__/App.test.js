@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { render, wait } from 'react-testing-library'
 import 'dom-testing-library/extend-expect'
