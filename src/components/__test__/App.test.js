@@ -1,9 +1,7 @@
 import React from 'react'
-import { render, Simulate, wait } from 'react-testing-library'
+import { render, wait } from 'react-testing-library'
 import 'dom-testing-library/extend-expect'
 import { MockedProvider } from 'react-apollo/test-utils'
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
 import { App, STOCKS_QUERY } from '../App'
 
 const stocks = [
