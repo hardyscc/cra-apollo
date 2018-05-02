@@ -12,10 +12,10 @@ export const STOCKS_QUERY = gql`
 `
 
 export const AppComponent = ({ loading, error, data }) => {
-  if (loading) return <div>Loading...</div>
+  if (loading) return <div id="loading">Loading...</div>
   if (error) return <div>Error :(</div>
   return (
-    <div>
+    <div id="stocks">
       Stocks :
       <ul>
         {data.stocks.map(stock => (

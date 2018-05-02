@@ -10,6 +10,7 @@
     "react-dom": "^16.3.2"
   },
   "devDependencies": {
+    "dom-testing-library": "^1.10.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-wait": "^1.0.9",

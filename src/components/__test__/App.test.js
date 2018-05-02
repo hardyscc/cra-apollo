@@ -1,11 +1,12 @@
 import React from 'react'
-import { render } from 'enzyme'
+import { mount } from 'enzyme'
 import { MockedProvider } from 'react-apollo/test-utils'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { STOCKS_QUERY, App } from '../App'
+import { wait } from 'dom-testing-library'
 
-it('renders welcome message', () => {
+it('renders welcome message', async () => {
   const data = { stocks: [{ code: '0001.HK', name: '0001' }] }
   const mocks = [
     {
@@ -13,10 +14,16 @@ it('renders welcome message', () => {
       result: { data }
     }
   ]
-  const tree = render(
+  const tree = mount(
     <MockedProvider mocks={mocks}>
-      <App data={data} />
+      <App />
     </MockedProvider>
   )
-  expect(tree).toMatchSnapshot()
+
+  await wait(() => {
+    tree.update()
+    return expect(tree.find('#stocks')).toHaveLength(1)
+  })
+
+  expect(tree.find('#stocks')).toMatchSnapshot()
 })
