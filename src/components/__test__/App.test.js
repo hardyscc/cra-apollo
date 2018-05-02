@@ -1,10 +1,10 @@
 import React from 'react'
 import { mount } from 'enzyme'
+import { createWaitForElement } from '@oskarer/enzyme-wait'
 import { MockedProvider } from 'react-apollo/test-utils'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { STOCKS_QUERY, App } from '../App'
-import { wait } from 'dom-testing-library'
 
 it('renders welcome message', async () => {
   const data = { stocks: [{ code: '0001.HK', name: '0001' }] }
@@ -14,16 +14,11 @@ it('renders welcome message', async () => {
       result: { data }
     }
   ]
-  const tree = mount(
+  const wrapper = mount(
     <MockedProvider mocks={mocks}>
       <App />
     </MockedProvider>
   )
-
-  await wait(() => {
-    tree.update()
-    return expect(tree.find('#stocks')).toHaveLength(1)
-  })
-
-  expect(tree.find('#stocks')).toMatchSnapshot()
+  const component = await createWaitForElement('#stocks')(wrapper)
+  expect(component).toMatchSnapshot()
 })
