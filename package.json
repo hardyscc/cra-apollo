@@ -22,6 +22,8 @@
     "flow": "flow"
   },
   "jest": {
-    "collectCoverageFrom": ["src/components/**/*.{js,jsx}"]
+    "collectCoverageFrom": [
+      "src/components/**/*.{js,jsx}"
+    ]
   }
 }
